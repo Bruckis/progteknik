@@ -46,12 +46,11 @@ int main(int argc, char *argv[]){
 
   // Repeat until user exits
   while (true)  {
-    
     // Variables
     double avg_sum = 0,avg = -1,med[100],med_calc = -1;
     int increments = 0,mode;
     char num1[256],num2[256],ch_input[5],input[5],avg_input_char[100],med_input[100];
-    char operators[5] = {'n','+','-','*','/'}; 
+    char operators[5] = {'n','+','-','*','/'};
     // n for prettier operator function
     // otherwise input-1
     // UGLY!
@@ -82,14 +81,12 @@ int main(int argc, char *argv[]){
       default:
         printf("Improper input. Enter only a number in the given range\n");
         break;
-      
       case 1 ... 4: // If input in range 1-4
         printf("Enter 2 numbers to compute\n");
         fgets(num1, sizeof(num1), stdin);
         fgets(num2, sizeof(num2), stdin);
         printf("Result: %lf\n", basic_calc(atoi(num1),atoi(num2),operators[mode]));
         break;
-      
       case 5:
         printf("Enter a number to compute\n");
         fgets(num1, sizeof(num1), stdin);
@@ -100,14 +97,12 @@ int main(int argc, char *argv[]){
           printf("No support for imaginary numbers in this calc. Don't make dev rant.\n");
         }
         break;
-
       case 6:
         printf("Enter 2 numbers to compute\n");
         fgets(num1, sizeof(num1), stdin);
         fgets(num2, sizeof(num2), stdin);
         printf("Result: %lf\n", pow(atoi(num1),atoi(num2)));
         break;
-
       case 7:
         printf("Calculatinga average. Press enter to calculate\n");
         while (avg == -1) {
@@ -123,7 +118,6 @@ int main(int argc, char *argv[]){
         }
         printf("Result: %lf\n", avg);
         break;
-
       case 8:
         printf("Calculating median. Press enter to calculate\n");
         double med_num;
@@ -145,14 +139,12 @@ int main(int argc, char *argv[]){
         else med_calc = (med[increments / 2] + med[increments / 2 - 1]) / 2;
         printf("Result: %lf\n", med_calc);
         break;
-
       case 9:
         printf("Enter formula to calculate\n");
         fgets(freetext, 1023, stdin);
         clean_string(freetext);
         printf("%s\n", freetext);
         break;
-
       case 0:
         printf("Exiting...\n");
         exit(0);
