@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <ctype.h>
 
 double basic_calc(double a, double b, char mode){
   switch (mode) {
@@ -24,9 +25,10 @@ double basic_calc(double a, double b, char mode){
   }
 }
 
-// Fancy comp function to make qsort() work. It works.
+// Fancy comp function to make qsort() work.
 // Too much pointer action for my understanding
-// But it returns if a is smaller, equal or bigger than b,. which qsort() needs
+// and is shamelessly adapted from online documentation
+// Returns if a is smaller, equal or bigger than b,. which qsort() needs
 int comp(const void *a, const void *b) {
     return (*(double *)a - *(double *)b);
 }
@@ -35,7 +37,8 @@ int comp(const void *a, const void *b) {
 void clean_string(char* s) {
     char* d = s;
     do {
-        while (*d == ' ') {
+        while (*d == ' ' || isalpha(*d)) { // isalpha() returns 0 if d is alphabet (not +-*/ etc...)
+
             ++d;
         }
     } while (*s++ = *d++);
@@ -54,7 +57,6 @@ int main(int argc, char *argv[]){
     // n for prettier operator function
     // otherwise input-1
     // UGLY!
-    // For use in freetext function
     char freetext[1024]; // 1 Kbit
 
 
@@ -141,9 +143,11 @@ int main(int argc, char *argv[]){
         break;
       case 9:
         printf("Enter formula to calculate\n");
-        fgets(freetext, 1023, stdin);
+        fgets(freetext, sizeof(freetext), stdin);
+        freetext[strcspn(freetext, "\n")] = 0; // Manually set where formula ends
         clean_string(freetext);
         printf("%s\n", freetext);
+        for(int i = 0;freetext[i] != 0;i++) printf("%c\n", freetext[i]);
         break;
       case 0:
         printf("Exiting...\n");
